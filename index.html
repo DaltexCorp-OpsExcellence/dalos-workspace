@@ -6,7 +6,7 @@
 <title>DalOS Workspace</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.8"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -35,6 +35,56 @@ body{font-family:var(--font-body);background:#0a120c;color:#eef0ea}
 .dbeat-crest{width:88px;height:88px;animation:dlogin-crest .5s cubic-bezier(.2,.9,.3,1.3) both;filter:drop-shadow(0 0 22px rgba(143,224,173,.22))}
 .dbeat-line{font-family:var(--font-display);font-size:30px;color:#f4f1e8;text-align:center;animation:dlogin-welcome 1.6s ease forwards}
 .dbeat-sub{font-size:11px;letter-spacing:.16em;text-transform:uppercase;animation:dh-veil-pop .5s .2s ease both;opacity:0}
+/* Commercial "opening" splash — pixel-matches the Commercial app's pre-mount splash
+   (same aubergine, same animated growth mark) so the redirect reads as ONE loading page. */
+.cmx{position:fixed;inset:0;z-index:10000;background:linear-gradient(160deg,#463f57 0%,#2f2a3d 46%,#201c29 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;animation:dh-veil-in .4s ease both}
+.cmx-mark{width:62px;height:62px;filter:drop-shadow(0 8px 22px rgba(124,77,255,.4))}
+.cmx-mark svg{width:100%;height:100%;display:block}
+.cmx-word{font-family:var(--font-display);font-size:22px;color:#f4f1e8}
+.cmx-word .os{color:#b9a6ff}
+.cmx-sub{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9a92b0;font-family:var(--font-body)}
+.cmx-mark svg path{stroke-dasharray:58;animation:cm-trace 1.9s ease-in-out infinite}
+.cmx-mark svg>circle{transform-box:fill-box;transform-origin:center;animation:cm-peak 1.9s ease-in-out infinite}
+.cmx-mark svg g circle{transform-box:fill-box;transform-origin:center;animation:cm-pop 1.9s ease-in-out infinite}
+@keyframes cm-trace{0%{stroke-dashoffset:58}45%{stroke-dashoffset:0}75%{stroke-dashoffset:0}100%{stroke-dashoffset:58}}
+@keyframes cm-peak{0%,100%{opacity:.5;transform:scale(.75)}45%,75%{opacity:1;transform:scale(1.15)}}
+@keyframes cm-pop{0%,100%{opacity:.35;transform:scale(.7)}45%,75%{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.cmx-mark svg path,.cmx-mark svg circle{animation:none;stroke-dashoffset:0;opacity:1;transform:none}}
+/* Land Cloud "opening" splash — pixel-matches the Land Cloud app's pre-mount splash
+   (teal #0e3a3d, animated hexagon mark) so its redirect reads as ONE loading page. */
+.lcx{position:fixed;inset:0;z-index:10000;background:#0e3a3d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;animation:dh-veil-in .4s ease both}
+.lcx-mark{width:60px;height:60px}
+.lcx-mark svg{width:100%;height:100%;display:block}
+.lcx-word{font-family:var(--font-display);font-size:22px;color:#f4f1e8}
+.lcx-word .os{color:#5fc9c4}
+.lcx-sub{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5f8583;font-family:var(--font-body)}
+.lc-anim .lc-ring{animation:lc-march 2.2s linear infinite}
+.lc-anim .lc-core{transform-box:fill-box;transform-origin:center;animation:lc-core 2.4s ease-in-out infinite}
+.lc-anim .lc-node{transform-box:fill-box;transform-origin:center;animation:lc-twinkle 1.8s ease-in-out infinite}
+.lc-anim .lc-node:nth-of-type(2){animation-delay:.12s}
+.lc-anim .lc-node:nth-of-type(3){animation-delay:.24s}
+.lc-anim .lc-node:nth-of-type(4){animation-delay:.36s}
+.lc-anim .lc-node:nth-of-type(5){animation-delay:.48s}
+.lc-anim .lc-node:nth-of-type(6){animation-delay:.6s}
+@keyframes lc-march{to{stroke-dashoffset:-46}}
+@keyframes lc-core{0%,100%{opacity:.72;transform:scale(.9)}50%{opacity:1;transform:scale(1.07)}}
+@keyframes lc-twinkle{0%,100%{opacity:.35}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.lcx .lc-ring,.lcx .lc-core,.lcx .lc-node{animation:none;stroke-dashoffset:0;opacity:1;transform:none}}
+/* Analytics "opening" splash — pixel-matches the Analytics app's loading splash
+   (navy #142850, animated Signature-bars mark) so its redirect reads as ONE loading page. */
+.anx{position:fixed;inset:0;z-index:10000;background:#142850;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;animation:dh-veil-in .4s ease both}
+.anx-mark{width:60px;height:60px;filter:drop-shadow(0 8px 22px rgba(220,100,40,.35))}
+.anx-mark svg{width:100%;height:100%;display:block}
+.anx-word{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.3px;color:#fff}
+.anx-word .os{color:#DC6428}
+.anx-sub{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7f8db0;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+.an-anim .an-bar{transform-box:fill-box;transform-origin:center bottom;animation:an-bar 1.8s ease-in-out infinite}
+.an-anim .an-bar:nth-of-type(2){animation-delay:.14s}
+.an-anim .an-bar:nth-of-type(3){animation-delay:.28s}
+.an-anim .an-dot{transform-box:fill-box;transform-origin:center;animation:an-dot 1.8s ease-in-out infinite;animation-delay:.28s}
+@keyframes an-bar{0%{transform:scaleY(.16)}45%{transform:scaleY(1)}75%{transform:scaleY(1)}100%{transform:scaleY(.16)}}
+@keyframes an-dot{0%,100%{opacity:.4;transform:scale(.7)}45%,75%{opacity:1;transform:scale(1.16)}}
+@media(prefers-reduced-motion:reduce){.anx .an-bar,.anx .an-dot{animation:none;transform:none;opacity:1}}
 .staging-badge{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#ff6b35 0%,#f7c948 100%);color:#fff;padding:5px 14px 5px 10px;border-radius:20px;box-shadow:0 3px 14px rgba(255,107,53,.45);font-size:10px;font-family:'Courier New',monospace;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
 .staging-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.9);display:inline-block;flex-shrink:0;animation:pulse 1.4s ease-in-out infinite}
 @keyframes dbd-aurora{0%{transform:translate(0,0) scale(1)}33%{transform:translate(4%,-3%) scale(1.08)}66%{transform:translate(-3%,4%) scale(.96)}100%{transform:translate(0,0) scale(1)}}
@@ -132,14 +182,29 @@ body{font-family:var(--font-body);background:#0a120c;color:#eef0ea}
 .dh-bento-2 .dh-primary{grid-row:auto;grid-column:auto}
 @media(max-width:760px){.dh-bento-2{grid-template-columns:1fr;grid-template-rows:auto;height:auto;min-height:0}}
 /* ── god-mode app cards (two distinct apps inside DalOS) ── */
-.app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;width:100%;max-width:1160px;position:relative;z-index:6;margin-bottom:auto;flex-shrink:0}
-@media(max-width:980px){.app-grid{grid-template-columns:1fr 1fr;max-width:720px;gap:18px}}
-@media(max-width:560px){.app-grid{grid-template-columns:1fr;max-width:380px}}
+.app-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;width:100%;max-width:1320px;position:relative;z-index:6;margin-bottom:auto;flex-shrink:0}
+@media(max-width:1160px){.app-grid{grid-template-columns:repeat(2,1fr);max-width:840px;gap:18px}}
 .app-card{position:relative;overflow:hidden;border-radius:24px;padding:24px 28px 22px;min-height:clamp(258px,42vh,380px);cursor:pointer;display:flex;flex-direction:column;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1);transition:transform .3s cubic-bezier(.3,1.25,.5,1),box-shadow .3s,border-color .3s;animation:dh-rise .6s ease both;opacity:0}
 .app-card:hover{transform:translateY(-6px);box-shadow:0 30px 70px rgba(0,0,0,.5);border-color:color-mix(in srgb,var(--ac) 55%,transparent)}
 .app-card:active{transform:translateY(-3px) scale(.992)}
 .app-vision{--ac:#6fc191;background:linear-gradient(162deg,rgba(60,122,85,.34),rgba(10,24,15,.55));border-color:rgba(111,193,145,.28);animation-delay:.10s}
 .app-analytics{--ac:#6aa8ff;background:linear-gradient(162deg,rgba(40,92,180,.32),rgba(10,16,28,.58));border-color:rgba(106,168,255,.30);animation-delay:.16s}
+.app-commercial{--ac:#b18cf0;background:linear-gradient(162deg,rgba(120,80,180,.32),rgba(16,10,26,.6));border-color:rgba(177,140,240,.30);animation-delay:.22s}
+.app-commercial.is-locked{--ac:#8b94a3}
+.app-commercial.is-locked .app-name{color:#cdd3dc}
+.app-commercial.is-locked .app-tag{color:rgba(244,241,232,.42)}
+.app-commercial.is-locked .app-chip{opacity:.55}
+.app-commercial.is-locked .app-emblem{filter:none}
+.app-commercial.is-locked .lock-badge{border-color:rgba(139,148,163,.55);color:#aab3c0}
+.app-commercial.is-soon{--ac:#8b94a3;background:linear-gradient(162deg,rgba(120,80,180,.14),rgba(16,10,26,.55));border-color:rgba(139,148,163,.24)}
+.app-commercial.is-soon .app-name{color:#cdd3dc}
+.app-commercial.is-soon .app-tag{color:rgba(244,241,232,.42)}
+.app-commercial.is-soon .app-chip{opacity:.5}
+.app-commercial.is-soon .app-emblem{opacity:.55;filter:grayscale(.35)}
+.app-commercial.is-soon .app-emblem svg *{animation:none!important}
+.app-commercial.is-soon .app-status{background:rgba(216,180,106,.16);color:#d8b46a;border-color:rgba(216,180,106,.34)}
+.app-commercial.is-soon .lock-badge{border-color:rgba(216,180,106,.5);color:#d8b46a}
+.app-commercial .soon-note{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#d8b46a;padding:9px 2px}
 .app-landcloud{--ac:#33cfe0;background:linear-gradient(162deg,rgba(22,132,150,.34),rgba(8,20,24,.58));border-color:rgba(51,207,224,.30);animation-delay:.28s}
 .app-landcloud.is-locked{--ac:#8b94a3}
 .app-landcloud.is-locked .app-name{color:#cdd3dc}
@@ -164,7 +229,34 @@ body{font-family:var(--font-body);background:#0a120c;color:#eef0ea}
 .app-go{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ac);border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);padding:10px 16px;border-radius:11px;transition:.2s;background:color-mix(in srgb,var(--ac) 8%,transparent)}
 .app-card:hover .app-go{background:var(--ac);color:#0a120c;border-color:var(--ac);box-shadow:0 8px 24px color-mix(in srgb,var(--ac) 40%,transparent)}
 .app-go b{font-weight:700;transition:transform .2s}
-.app-card:hover .app-go b{transform:translateX(4px)}.app-analytics.is-locked,.app-analytics.is-pending{--ac:#8b94a3}.app-analytics.is-locked .app-name,.app-analytics.is-pending .app-name{color:#cdd3dc}.app-analytics.is-locked .app-tag,.app-analytics.is-pending .app-tag{color:rgba(244,241,232,.42)}.app-analytics.is-locked .app-chip,.app-analytics.is-pending .app-chip{opacity:.55}.app-analytics.is-locked .app-emblem,.app-analytics.is-pending .app-emblem{filter:none}.app-emblem .lock-badge{position:absolute;right:-6px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:#11192a;border:1px solid rgba(139,148,163,.55);display:flex;align-items:center;justify-content:center;font-size:12px;color:#aab3c0;z-index:3}.app-analytics.is-locked .lock-badge{border-color:rgba(106,168,255,.55);color:#6aa8ff}.app-analytics.is-locked .app-go{background:#6aa8ff;color:#0a120c;border:1px solid #6aa8ff}.app-analytics.is-locked:hover .app-go{background:#83b8ff;border-color:#83b8ff;box-shadow:0 8px 24px rgba(106,168,255,.4)}.app-analytics.is-pending .app-status{background:rgba(216,180,106,.16);color:#d8b46a;border-color:rgba(216,180,106,.34)}.app-analytics.is-pending .lock-badge{border-color:rgba(216,180,106,.5);color:#d8b46a}.app-analytics.is-pending .pend-note{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#d8b46a;padding:9px 2px}
+.app-card:hover .app-go b{transform:translateX(4px)}.app-analytics.is-locked,.app-analytics.is-pending{--ac:#8b94a3}.app-analytics.is-locked .app-name,.app-analytics.is-pending .app-name{color:#cdd3dc}.app-analytics.is-locked .app-tag,.app-analytics.is-pending .app-tag{color:rgba(244,241,232,.42)}.app-analytics.is-locked .app-chip,.app-analytics.is-pending .app-chip{opacity:.55}.app-analytics.is-locked .app-emblem,.app-analytics.is-pending .app-emblem{filter:none}.app-emblem .lock-badge{position:absolute;right:-6px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:#11192a;border:1px solid rgba(139,148,163,.55);display:flex;align-items:center;justify-content:center;font-size:12px;color:#aab3c0;z-index:3}
+/* ── Idle card-logo animations — a slow "signature" motion per app that echoes
+   its loading mark. Transform/dash based so it reads through the emblem opacity.
+   Disabled under reduced-motion. ── */
+@keyframes cardl-twinkle{0%,100%{transform:scale(.86)}50%{transform:scale(1.1)}}
+@keyframes cardl-eq{0%,100%{transform:scaleY(.8)}50%{transform:scaleY(1)}}
+@keyframes cardl-pulse{0%,100%{transform:scale(.86)}50%{transform:scale(1.16)}}
+@keyframes cardl-breathe{0%,100%{transform:scale(.95)}50%{transform:scale(1.05)}}
+@keyframes cardl-march{to{stroke-dashoffset:-50}}
+@keyframes cardl-grape{0%,100%{transform:scale(.62);opacity:.5}50%{transform:scale(1.3);opacity:1}}
+.app-vision .app-emblem svg g circle{transform-box:fill-box;transform-origin:center;animation:cardl-grape 2.6s ease-in-out infinite}
+.app-vision .app-emblem svg g circle:nth-of-type(2){animation-delay:.25s}
+.app-vision .app-emblem svg g circle:nth-of-type(3){animation-delay:.5s}
+.app-vision .app-emblem svg g circle:nth-of-type(4){animation-delay:.75s}
+.app-vision .app-emblem svg g circle:nth-of-type(5){animation-delay:1s}
+.app-vision .app-emblem svg g circle:nth-of-type(6){animation-delay:1.25s}
+.app-analytics .app-emblem svg rect{transform-box:fill-box;transform-origin:center bottom;animation:cardl-eq 1.9s ease-in-out infinite}
+.app-analytics .app-emblem svg rect:nth-of-type(2){animation-delay:.22s}
+.app-analytics .app-emblem svg rect:nth-of-type(3){animation-delay:.44s}
+.app-analytics .app-emblem svg circle{transform-box:fill-box;transform-origin:center;animation:cardl-pulse 1.9s ease-in-out infinite;animation-delay:.44s}
+.app-commercial .app-emblem svg path{stroke-dasharray:58;animation:cm-trace 2.4s ease-in-out infinite}
+.app-commercial .app-emblem svg>circle{transform-box:fill-box;transform-origin:center;animation:cm-peak 2.4s ease-in-out infinite}
+.app-commercial .app-emblem svg g circle{transform-box:fill-box;transform-origin:center;animation:cm-pop 2.4s ease-in-out infinite}
+.app-commercial .app-emblem svg g circle:nth-of-type(2){animation-delay:.15s}
+.app-commercial .app-emblem svg g circle:nth-of-type(3){animation-delay:.3s}
+.app-landcloud .app-emblem svg path:nth-of-type(1){animation:cardl-march 3.2s linear infinite}
+.app-landcloud .app-emblem svg path:nth-of-type(2){transform-box:fill-box;transform-origin:center;animation:cardl-breathe 3.2s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.app-card .app-emblem svg *{animation:none!important}}.app-analytics.is-locked .lock-badge{border-color:rgba(106,168,255,.55);color:#6aa8ff}.app-analytics.is-locked .app-go{background:#6aa8ff;color:#0a120c;border:1px solid #6aa8ff}.app-analytics.is-locked:hover .app-go{background:#83b8ff;border-color:#83b8ff;box-shadow:0 8px 24px rgba(106,168,255,.4)}.app-analytics.is-pending .app-status{background:rgba(216,180,106,.16);color:#d8b46a;border-color:rgba(216,180,106,.34)}.app-analytics.is-pending .lock-badge{border-color:rgba(216,180,106,.5);color:#d8b46a}.app-analytics.is-pending .pend-note{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#d8b46a;padding:9px 2px}
 @media(max-width:760px){.app-grid{grid-template-columns:1fr;gap:14px}.app-card{min-height:0;padding:20px}}
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwYjE1MTAiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3LjAwMCwzOC42MjEpIHNjYWxlKDAuMDE4OTE4LC0wLjAxODkxOCkiPjxwYXRoIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsMCkiIGQ9Ik0yMiAwVjEwTDQzIDE4UTc1IDMxIDc1IDY5VjU5MVE3NSA2MzEgNDMgNjQyTDIyIDY1MFY2NjBIMjg2UTM5MiA2NjAgNDY4LjUgNjIwLjVRNTQ1IDU4MSA1ODYuNSA1MDcuNVE2MjggNDM0IDYyOCAzMzFRNjI4IDIyNiA1ODMuMCAxNTIuMFE1MzggNzggNDU3LjUgMzkuMFEzNzcgMCAyNjggMFpNMjI1IDIwSDI2OFEzNDAgMjAgMzg0LjAgNDguNVE0MjggNzcgNDQ4LjUgMTQ0LjVRNDY5IDIxMiA0NjkgMzMwUTQ2OSA0NDggNDQ4LjUgNTE1LjVRNDI4IDU4MyAzODUuMCA2MTEuNVEzNDIgNjQwIDI3MiA2NDBIMjI1WiIgZmlsbD0iI2ZmZmZmZiIvPjxwYXRoIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY0OCwwKSIgZD0iTTE2NiAtMTVRMTA4IC0xNSA2OC41IDE4LjBRMjkgNTEgMjkgMTEzUTI5IDE2MCA3Ny4wIDE5OS41UTEyNSAyMzkgMjI4IDI1OVEyNDQgMjYyIDI2NC4wIDI2NS41UTI4NCAyNjkgMzA2IDI3M1YzNTJRMzA2IDQyMCAyODkuNSA0NDcuNVEyNzMgNDc1IDIzOCA0NzVRMjE0IDQ3NSAyMDAuMCA0NTkuNVExODYgNDQ0IDE4MiA0MDZMMTgwIDM5NVExNzggMzUyIDE1OS4wIDMzMi4wUTE0MCAzMTIgMTEyIDMxMlE4NiAzMTIgNjkuMCAzMjguMFE1MiAzNDQgNTIgMzcxUTUyIDQxMiA4MC41IDQ0MC4wUTEwOSA0NjggMTU2LjAgNDgyLjBRMjAzIDQ5NiAyNTggNDk2UTM0NyA0OTYgMzk1LjUgNDUyLjVRNDQ0IDQwOSA0NDQgMzExVjkwUTQ0NCA0NSA0ODYgNDVINTA4TDUxNyAzN1E0OTggMTMgNDc1LjUgMC4wUTQ1MyAtMTMgNDEyIC0xM1EzNjggLTEzIDM0Mi41IDcuNVEzMTcgMjggMzA5IDYyUTI3OSAzMCAyNDcuNSA3LjVRMjE2IC0xNSAxNjYgLTE1Wk0yMjcgNDZRMjQ3IDQ2IDI2NC41IDU1LjVRMjgyIDY1IDMwNiA4NVYyNTNRMjk2IDI1MSAyODYuMCAyNDkuMFEyNzYgMjQ3IDI2MyAyNDVRMjE3IDIzMyAxODkuNSAyMDQuNVExNjIgMTc2IDE2MiAxMjhRMTYyIDg3IDE4MS4wIDY2LjVRMjAwIDQ2IDIyNyA0NloiIGZpbGw9IiNmZmZmZmYiLz48cGF0aCB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMTY2LDApIiBkPSJNMjMgMFYxMEwzNSAxNFE3MSAyNiA3MSA2NFY1OTlRNzEgNjE5IDYzLjAgNjI5LjVRNTUgNjQwIDM1IDY0NUwyMiA2NDhWNjU4TDIwNSA3MDFMMjE3IDY5MkwyMTMgNTUyVjIxMFEyMTMgMTczIDIxMy41IDEzNi41UTIxNCAxMDAgMjE0IDY0UTIxNCA0NCAyMjIuMCAzMS41UTIzMCAxOSAyNDkgMTNMMjYyIDEwVjBaIiBmaWxsPSIjZmZmZmZmIi8+PHBhdGggdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTQ1MiwwKSIgZD0iTTMzNSAtMThRMjc0IC0xOCAyMTcuNSA0LjBRMTYxIDI2IDExNi41IDY5LjVRNzIgMTEzIDQ2LjAgMTc4LjBRMjAgMjQzIDIwIDMzMFEyMCA0MTYgNDYuMCA0ODEuMFE3MiA1NDYgMTE3LjAgNTg5LjVRMTYyIDYzMyAyMTguNSA2NTUuNVEyNzUgNjc4IDMzNSA2NzhRMzk2IDY3OCA0NTIuNSA2NTYuNVE1MDkgNjM1IDU1My41IDU5MS41UTU5OCA1NDggNjI0LjAgNDgyLjVRNjUwIDQxNyA2NTAgMzMwUTY1MCAyNDUgNjI0LjAgMTc5LjVRNTk4IDExNCA1NTMuNSA3MC41UTUwOSAyNyA0NTIuNSA0LjVRMzk2IC0xOCAzMzUgLTE4Wk0zMzUgM1EzOTAgMyA0MjQuMCAzMi41UTQ1OCA2MiA0NzMuNSAxMzMuNVE0ODkgMjA1IDQ4OSAzMzBRNDg5IDQ1NiA0NzMuNSA1MjcuNVE0NTggNTk5IDQyNC4wIDYyOC41UTM5MCA2NTggMzM1IDY1OFEyODEgNjU4IDI0Ny4wIDYyOC41UTIxMyA1OTkgMTk3LjUgNTI3LjVRMTgyIDQ1NiAxODIgMzMwUTE4MiAyMDUgMTk3LjUgMTMzLjVRMjEzIDYyIDI0Ny4wIDMyLjVRMjgxIDMgMzM1IDNaIiBmaWxsPSIjNmZjMTkxIi8+PHBhdGggdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjEyMiwwKSIgZD0iTTIzNyAtMThRMTgyIC0xOCAxMjUuMCAtNC41UTY4IDkgMzAgMzFMMzUgMTY3SDQ1TDc2IDEwMlE5MCA3NCAxMDYuMCA1Mi41UTEyMiAzMSAxNTAgMTlRMTcwIDkgMTg4LjUgNS41UTIwNyAyIDIzMCAyUTI5MSAyIDMyNi41IDM1LjBRMzYyIDY4IDM2MiAxMjBRMzYyIDE2OSAzMzguMCAxOTYuNVEzMTQgMjI0IDI2MSAyNTBMMjIwIDI2OFExMzQgMzA2IDg1LjUgMzU1LjVRMzcgNDA1IDM3IDQ4N1EzNyA1NDYgNjcuNSA1ODkuMFE5OCA2MzIgMTUyLjUgNjU1LjBRMjA3IDY3OCAyODAgNjc4UTMzMyA2NzggMzgwLjUgNjY0LjBRNDI4IDY1MCA0NjMgNjI2TDQ1NyA1MDZINDQ3TDQwNiA1ODFRMzg5IDYxNiAzNzIuMCA2MzAuNVEzNTUgNjQ1IDMzMyA2NTFRMzIwIDY1NSAzMDkuMCA2NTYuNVEyOTggNjU4IDI4MSA2NThRMjMwIDY1OCAxOTUuMCA2MjguNVExNjAgNTk5IDE2MCA1NDlRMTYwIDQ5OCAxODcuMCA0NjcuNVEyMTQgNDM3IDI2NiA0MTNMMzEyIDM5M1E0MDggMzUxIDQ1MC4wIDMwMy41UTQ5MiAyNTYgNDkyIDE4MVE0OTIgOTMgNDI1LjUgMzcuNVEzNTkgLTE4IDIzNyAtMThaIiBmaWxsPSIjNmZjMTkxIi8+PC9nPjwvc3ZnPg=="/>
@@ -249,13 +341,23 @@ body{font-family:var(--font-body);background:#0a120c;color:#eef0ea}
       </div>
       <div class="app-card app-analytics" id="tileAnalytics">
         <div class="app-glow"></div><div class="app-sheen"></div>
-        <div class="app-watermark"><svg viewBox="0 0 48 48" width="100%" height="100%"><g fill="currentColor"><rect x="8" y="27" width="7" height="13" rx="2"/><rect x="20" y="21" width="7" height="19" rx="2"/><rect x="32" y="14" width="7" height="26" rx="2"/></g><path d="M9 19 L20 14 L31 9 L40 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 5 L40 5 L40 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="app-watermark"><svg viewBox="0 0 64 64" width="100%" height="100%"><g fill="currentColor"><rect x="14" y="32" width="8.5" height="18" rx="4"/><rect x="27.75" y="24" width="8.5" height="26" rx="4"/><rect x="41.5" y="15" width="8.5" height="35" rx="4"/><circle cx="45.75" cy="15" r="4.3"/></g></svg></div>
         <div class="app-head"><span class="app-eyebrow">Insights</span><span class="app-status">New</span></div>
-        <div class="app-emblem"><svg viewBox="0 0 48 48" width="100%" height="100%"><g fill="currentColor"><rect x="8" y="27" width="7" height="13" rx="2"/><rect x="20" y="21" width="7" height="19" rx="2"/><rect x="32" y="14" width="7" height="26" rx="2"/></g><path d="M9 19 L20 14 L31 9 L40 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 5 L40 5 L40 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="app-emblem"><svg viewBox="0 0 64 64" width="100%" height="100%" fill="none"><rect x="14" y="32" width="8.5" height="18" rx="4" fill="#f08a4b"/><rect x="27.75" y="24" width="8.5" height="26" rx="4" fill="#DC6428"/><rect x="41.5" y="15" width="8.5" height="35" rx="4" fill="#DC6428"/><circle cx="45.75" cy="15" r="4.3" fill="#f7c948"/></svg></div>
         <div class="app-name">DalOS Analytics</div>
         <div class="app-tag">Live shipment &amp; market intelligence across the whole season.</div>
         <div class="app-chips"><span class="app-chip">Markets</span><span class="app-chip">Farms</span><span class="app-chip">Varieties</span><span class="app-chip">Clients</span><span class="app-chip">Cartons</span><span class="app-chip">Explorer</span></div>
         <div class="app-foot"><span class="app-go">Open Analytics <b>→</b></span></div>
+      </div>
+      <div class="app-card app-commercial is-soon" id="tileCommercial" style="cursor:default">
+        <div class="app-glow"></div><div class="app-sheen"></div>
+        <div class="app-watermark"><svg viewBox="0 0 64 64" width="100%" height="100%" fill="none"><path d="M11 44 L25 36 L37 40 L53 17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><g fill="currentColor" opacity=".55"><circle cx="11" cy="44" r="2.6"/><circle cx="25" cy="36" r="2.6"/><circle cx="37" cy="40" r="2.6"/><circle cx="53" cy="17" r="3.4"/></g></svg></div>
+        <div class="app-head"><span class="app-eyebrow">Commercial</span><span class="app-status">Soon</span></div>
+        <div class="app-emblem"><svg viewBox="4 4 56 50" width="100%" height="100%" fill="none"><path d="M11 44 L25 36 L37 40 L53 17" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><g fill="currentColor"><circle cx="11" cy="44" r="3"/><circle cx="25" cy="36" r="3"/><circle cx="37" cy="40" r="3"/></g><circle cx="53" cy="17" r="5" fill="currentColor"/></svg></div>
+        <div class="app-name">DalOS Commercial</div>
+        <div class="app-tag">Claims, redirections, regional performance and lead generation.</div>
+        <div class="app-chips"><span class="app-chip">Claims</span><span class="app-chip">Redirections</span><span class="app-chip">Regions</span><span class="app-chip">Voyages</span><span class="app-chip">Leads</span><span class="app-chip">Campaigns</span></div>
+        <div class="app-foot"><span class="soon-note"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-0.16em"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> Coming soon</span></div>
       </div>
       <div class="app-card app-landcloud" id="tileLandCloud">
         <div class="app-glow"></div><div class="app-sheen"></div>
@@ -282,7 +384,10 @@ var DALOS_SUPABASE_URL='https://sfyjvgjwvtwkrnqrvqyc.supabase.co';
 var DALOS_SUPABASE_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNmeWp2Z2p3dnR3a3JucXJ2cXljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4NzIxNjYsImV4cCI6MjA5MDQ0ODE2Nn0.FjA75XZsp0Kx5Xam_rrnYoAHX4JHKey6vEFCH_zlMuQ';
 var VISION_URL='https://daltexcorp-opsexcellence.github.io/dalos-vision/';
 var ANALYTICS_URL='https://daltexcorp-opsexcellence.github.io/dalos-analytics/';
+var COMMERCIAL_URL='https://daltexcorp-opsexcellence.github.io/dalos-commercial/';
 var LANDCLOUD_URL='https://daltexcorp-opsexcellence.github.io/dalos-land-cloud/';
+/* Roles Vision grants viewCRM to — mirror exactly. Card is cosmetic; the Commercial app + RLS are the real gate. */
+var COMMERCIAL_ROLES={admin:1,power_user:1,commercial:1,marketing:1};
 /* Mirror farm_can_read()'s role set exactly. Card is cosmetic; the module + RLS are the real gate. */
 var FARM_ROLES={admin:1,power_user:1,agronomy_admin:1,agronomy_viewer:1,commercial:1};
 var DALOS_LINK=(function(){
@@ -299,6 +404,7 @@ var DALOS_LINK=(function(){
   }catch(e){}
   return out;
 })();
+var sb=window.supabase.createClient(DALOS_SUPABASE_URL,DALOS_SUPABASE_ANON);
 
 /* ── Shared idle heartbeat ────────────────────────────────────────────────
    All DalOS apps share one GitHub Pages origin, so they share localStorage and
@@ -321,7 +427,7 @@ var DALOS_ACTIVITY_KEY='dalos_last_activity';
   });
   mark();
 })();
-var sb=window.supabase.createClient(DALOS_SUPABASE_URL,DALOS_SUPABASE_ANON);
+
 function $(id){return document.getElementById(id);}
 function setBusy(btn,on,b,i){btn.disabled=on;btn.style.opacity=on?'.7':'1';btn.textContent=on?b:i;}
 function showErr(m){var e=$('err');e.textContent=m;e.style.display=m?'block':'none';}
@@ -386,7 +492,7 @@ function fillChooser(u){
   $('chHeadline').innerHTML=g+', '+first+'.<br>Choose your <span class="dh-accent">workspace</span>.';
   $('chAv').textContent=initials;$('chName').textContent=name||'—';$('chRole').textContent=role||'—';
 }
-var BEAT_CREST='<svg viewBox="0 0 200 200" width="100%" height="100%"><defs><linearGradient id="dhgold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0bd7a"/><stop offset="1" stop-color="#8fe0ad"/></linearGradient></defs><circle cx="100" cy="100" r="74" fill="none" stroke="url(#dhgold)" stroke-width="1.5"/><circle cx="100" cy="100" r="62" fill="none" stroke="url(#dhgold)" stroke-width="2"/><circle cx="100" cy="74" r="11" fill="url(#dhgold)"/><circle cx="82" cy="90" r="11" fill="url(#dhgold)"/><circle cx="118" cy="90" r="11" fill="url(#dhgold)"/><circle cx="90" cy="108" r="11" fill="url(#dhgold)"/><circle cx="110" cy="108" r="11" fill="url(#dhgold)"/><circle cx="100" cy="126" r="11" fill="url(#dhgold)"/><circle cx="76" cy="110" r="9" fill="url(#dhgold)" opacity=".8"/><circle cx="124" cy="110" r="9" fill="url(#dhgold)" opacity=".8"/><path d="M100 63 L100 48 M100 48 Q114 44 120 54" fill="none" stroke="url(#dhgold)" stroke-width="2.5" stroke-linecap="round"/></svg>';var BEAT_EMB_V='<svg viewBox="0 0 48 48" width="100%" height="100%" fill="none"><circle cx="24" cy="24" r="17" stroke="currentColor" stroke-width="1.4" opacity=".5"/><g fill="currentColor"><circle cx="24" cy="17" r="3.1"/><circle cx="19" cy="22" r="3.1"/><circle cx="29" cy="22" r="3.1"/><circle cx="21.5" cy="27" r="3.1"/><circle cx="26.5" cy="27" r="3.1"/><circle cx="24" cy="32" r="3.1"/></g><path d="M24 14 V11 Q27 10 29 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>';var BEAT_EMB_A='<svg viewBox="0 0 48 48" width="100%" height="100%"><g fill="currentColor"><rect x="8" y="27" width="7" height="13" rx="2"/><rect x="20" y="21" width="7" height="19" rx="2"/><rect x="32" y="14" width="7" height="26" rx="2"/></g><path d="M9 19 L20 14 L31 9 L40 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 5 L40 5 L40 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';var BEAT_EMB_LC='<svg viewBox="0 0 48 48" width="100%" height="100%" fill="none"><path d="M6 16 L20 4 L39 10 L44 27 L29 42 L10 36 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-dasharray="5.5 4"/><path d="M14 19 L23 13 L34 16 L36 26 L27 34 L16 30 Z" fill="currentColor"/></svg>';
+var BEAT_CREST='<svg viewBox="0 0 200 200" width="100%" height="100%"><defs><linearGradient id="dhgold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0bd7a"/><stop offset="1" stop-color="#8fe0ad"/></linearGradient></defs><circle cx="100" cy="100" r="74" fill="none" stroke="url(#dhgold)" stroke-width="1.5"/><circle cx="100" cy="100" r="62" fill="none" stroke="url(#dhgold)" stroke-width="2"/><circle cx="100" cy="74" r="11" fill="url(#dhgold)"/><circle cx="82" cy="90" r="11" fill="url(#dhgold)"/><circle cx="118" cy="90" r="11" fill="url(#dhgold)"/><circle cx="90" cy="108" r="11" fill="url(#dhgold)"/><circle cx="110" cy="108" r="11" fill="url(#dhgold)"/><circle cx="100" cy="126" r="11" fill="url(#dhgold)"/><circle cx="76" cy="110" r="9" fill="url(#dhgold)" opacity=".8"/><circle cx="124" cy="110" r="9" fill="url(#dhgold)" opacity=".8"/><path d="M100 63 L100 48 M100 48 Q114 44 120 54" fill="none" stroke="url(#dhgold)" stroke-width="2.5" stroke-linecap="round"/></svg>';var BEAT_EMB_V='<svg viewBox="0 0 48 48" width="100%" height="100%" fill="none"><circle cx="24" cy="24" r="17" stroke="currentColor" stroke-width="1.4" opacity=".5"/><g fill="currentColor"><circle cx="24" cy="17" r="3.1"/><circle cx="19" cy="22" r="3.1"/><circle cx="29" cy="22" r="3.1"/><circle cx="21.5" cy="27" r="3.1"/><circle cx="26.5" cy="27" r="3.1"/><circle cx="24" cy="32" r="3.1"/></g><path d="M24 14 V11 Q27 10 29 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>';var BEAT_EMB_A='<svg viewBox="0 0 48 48" width="100%" height="100%"><g fill="currentColor"><rect x="8" y="27" width="7" height="13" rx="2"/><rect x="20" y="21" width="7" height="19" rx="2"/><rect x="32" y="14" width="7" height="26" rx="2"/></g><path d="M9 19 L20 14 L31 9 L40 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 5 L40 5 L40 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';var BEAT_EMB_C='<svg viewBox="0 0 64 64" width="100%" height="100%" fill="none"><path d="M11 44 L25 36 L37 40 L53 17" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/><g fill="currentColor"><circle cx="11" cy="44" r="2.9"/><circle cx="25" cy="36" r="2.9"/><circle cx="37" cy="40" r="2.9"/><circle cx="53" cy="17" r="4.4"/></g></svg>';var BEAT_EMB_LC='<svg viewBox="0 0 48 48" width="100%" height="100%" fill="none"><path d="M6 16 L20 4 L39 10 L44 27 L29 42 L10 36 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-dasharray="5.5 4"/><path d="M14 19 L23 13 L34 16 L36 26 L27 34 L16 30 Z" fill="currentColor"/></svg>';
 function showBeat(opts){
   var o=document.createElement('div');o.className='dbeat';
   o.style.background=opts.bg||'radial-gradient(circle at 50% 46%, #0e1b12 0%, #0a120c 72%)';
@@ -416,7 +522,7 @@ function openNext(target,animate){
   } else {fire(900);}
 }
 function showChooser(u,animate){
-  fillChooser(u);applyAnalyticsState();applyLandCloudState(u);
+  fillChooser(u);applyAnalyticsState();applyCommercialState(u);applyLandCloudState(u);
   if(animate){
     $('lcard').classList.remove('dlogin-card-in');$('lcard').classList.add('dlogin-card-exit');
     var first=((u.name||u.full_name||'').trim().split(' ')[0])||'';
@@ -427,9 +533,52 @@ function showChooser(u,animate){
     },420);
   } else {$('loginStage').style.display='none';$('chooserStage').style.display='flex';}
 }
+/* Same transparent animated growth mark used by the Commercial app splash. */
+var CM_SPLASH_MARK='<svg width="100%" height="100%" viewBox="4 4 56 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 44 L25 36 L37 40 L53 17" stroke="#c9b6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><g fill="#a98bff"><circle cx="11" cy="44" r="3"/><circle cx="25" cy="36" r="3"/><circle cx="37" cy="40" r="3"/></g><circle cx="53" cy="17" r="5.2" fill="#e2d7ff"/></svg>';
+/* Commercial opens straight into its animated aubergine splash, which the app then
+   continues on the other side of the redirect — one loading experience, not two. */
+function showCommercialSplash(){
+  $('loginStage').style.display='none';
+  var cs=$('chooserStage'); if(cs) cs.style.display='none';
+  var o=document.createElement('div'); o.className='cmx';
+  o.innerHTML='<div class="cmx-mark">'+CM_SPLASH_MARK+'</div>'+
+    '<div class="cmx-word">Dal<span class="os">OS</span> Commercial</div>'+
+    '<div class="cmx-sub">Loading…</div>';
+  document.body.appendChild(o);
+  setTimeout(function(){ window.location.href=COMMERCIAL_URL; },1000);
+}
+/* Same animated dashed-hexagon mark used by the Land Cloud app splash. */
+var LC_SPLASH_MARK='<svg class="lc-anim" width="100%" height="100%" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="lc-ring" d="M8 22 L27 6 L52 13 L58 36 L39 56 L14 48 Z" stroke="#5fc9c4" stroke-width="2.4" stroke-linejoin="round" stroke-dasharray="6.5 5" opacity=".9"/><path class="lc-core" d="M19 25 L30 17 L45 21 L48 34 L36 45 L22 40 Z" fill="#8fe0ad"/><g fill="#5fc9c4"><circle class="lc-node" cx="8" cy="22" r="2.9"/><circle class="lc-node" cx="27" cy="6" r="2.9"/><circle class="lc-node" cx="52" cy="13" r="2.9"/><circle class="lc-node" cx="58" cy="36" r="2.9"/><circle class="lc-node" cx="39" cy="56" r="2.9"/><circle class="lc-node" cx="14" cy="48" r="2.9"/></g></svg>';
+function showLandCloudSplash(){
+  $('loginStage').style.display='none';
+  var cs=$('chooserStage'); if(cs) cs.style.display='none';
+  var o=document.createElement('div'); o.className='lcx';
+  o.innerHTML='<div class="lcx-mark">'+LC_SPLASH_MARK+'</div>'+
+    '<div class="lcx-word">Dal<span class="os">OS</span> Land Cloud</div>'+
+    '<div class="lcx-sub">Loading…</div>';
+  document.body.appendChild(o);
+  setTimeout(function(){ window.location.href=LANDCLOUD_URL; },1000);
+}
+/* Same animated Signature-bars mark used by the Analytics app splash. */
+var AN_SPLASH_MARK='<svg class="an-anim" width="100%" height="100%" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="an-bar" x="14" y="32" width="8.5" height="18" rx="4" fill="#f08a4b"/><rect class="an-bar" x="27.75" y="24" width="8.5" height="26" rx="4" fill="#DC6428"/><rect class="an-bar" x="41.5" y="15" width="8.5" height="35" rx="4" fill="#DC6428"/><circle class="an-dot" cx="45.75" cy="15" r="4.3" fill="#f7c948"/></svg>';
+function showAnalyticsSplash(){
+  $('loginStage').style.display='none';
+  var cs=$('chooserStage'); if(cs) cs.style.display='none';
+  var o=document.createElement('div'); o.className='anx';
+  o.innerHTML='<div class="anx-mark">'+AN_SPLASH_MARK+'</div>'+
+    '<div class="anx-word">Dal<span class="os">OS</span> Analytics</div>'+
+    '<div class="anx-sub">Loading…</div>';
+  document.body.appendChild(o);
+  setTimeout(function(){ window.location.href=ANALYTICS_URL; },1000);
+}
 function openProduct(which){
+  if(which==='commercial'){ showCommercialSplash(); return; }
+  if(which==='landcloud'){ showLandCloudSplash(); return; }
+  if(which==='analytics'){ showAnalyticsSplash(); return; }
   var c=which==='vision'
     ?{accent:'#6fc191',label:'DalOS Vision',url:VISION_URL,emb:BEAT_EMB_V}
+    :which==='commercial'
+    ?{accent:'#b18cf0',label:'DalOS Commercial',url:COMMERCIAL_URL,emb:BEAT_EMB_C}
     :which==='landcloud'
     ?{accent:'#5fc9c4',label:'DalOS Land Cloud',url:LANDCLOUD_URL,emb:BEAT_EMB_LC}
     :{accent:'#6aa8ff',label:'DalOS Analytics',url:ANALYTICS_URL,emb:BEAT_EMB_A};
@@ -437,12 +586,18 @@ function openProduct(which){
 }
 function setAnalyticsTile(state){var t=$('tileAnalytics');if(!t)return;var LOCK='<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-0.16em"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>';var CLOCK='<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-0.16em"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>';t.setAttribute('data-state',state);t.classList.remove('is-locked','is-pending');var foot=t.querySelector('.app-foot');var status=t.querySelector('.app-status');var emblem=t.querySelector('.app-emblem');var ob=emblem?emblem.querySelector('.lock-badge'):null;if(ob)ob.remove();if(state==='granted'){t.style.opacity='';t.style.cursor='pointer';if(foot)foot.innerHTML='<span class="app-go">Open Analytics <b>\u2192</b></span>';if(status)status.textContent='New';}else if(state==='pending'){t.classList.add('is-pending');t.style.opacity='';t.style.cursor='default';if(foot)foot.innerHTML='<span class="pend-note">'+CLOCK+' Requested \u00b7 awaiting approval</span>';if(status)status.innerHTML='<span style="font-size:9px">'+CLOCK+'</span> Pending';if(emblem){var bp=document.createElement('span');bp.className='lock-badge';bp.innerHTML=CLOCK;emblem.appendChild(bp);}}else{t.classList.add('is-locked');t.style.opacity='';t.style.cursor='pointer';if(foot)foot.innerHTML='<span class="app-go">'+LOCK+' Request access</span>';if(status)status.innerHTML='<span style="font-size:9px">'+LOCK+'</span> Locked';if(emblem){var bl=document.createElement('span');bl.className='lock-badge';bl.innerHTML=LOCK;emblem.appendChild(bl);}}}
 function applyAnalyticsState(){return sb.rpc('my_analytics_state').then(function(r){setAnalyticsTile((r&&!r.error&&r.data)?r.data:'none');}).catch(function(){setAnalyticsTile('none');});}function requestAnalyticsAccess(){var t=$('tileAnalytics');var foot=t.querySelector('.app-foot');if(foot)foot.innerHTML='<span class="app-go" style="opacity:.7">Requesting\u2026</span>';sb.auth.getSession().then(function(s){var tok=s&&s.data&&s.data.session&&s.data.session.access_token;fetch(DALOS_SUPABASE_URL+'/functions/v1/analytics-access-request',{method:'POST',headers:{'Content-Type':'application/json','apikey':DALOS_SUPABASE_ANON,'Authorization':'Bearer '+tok},body:JSON.stringify({base:location.origin+location.pathname.replace(/[^/]*$/,'')})}).then(function(res){return res.json();}).then(function(j){setAnalyticsTile(j&&j.status==='granted'?'granted':'pending');}).catch(function(){setAnalyticsTile('none');});});}
+/* Commercial tile — role-gated (client-side, cosmetic). Granted = open; else a locked
+   tile with no request flow (CRM access is role-based, granted by an admin in Vision). */
+function setCommercialTile(state){var t=$('tileCommercial');if(!t)return;var LOCK='<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-0.16em"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>';var CLOCK='<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-0.16em"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>';t.setAttribute('data-state',state);t.classList.remove('is-locked','is-soon');var foot=t.querySelector('.app-foot');var status=t.querySelector('.app-status');var emblem=t.querySelector('.app-emblem');var ob=emblem?emblem.querySelector('.lock-badge'):null;if(ob)ob.remove();if(state==='soon'){t.classList.add('is-soon');t.style.cursor='default';if(foot)foot.innerHTML='<span class="soon-note">'+CLOCK+' Coming soon</span>';if(status)status.textContent='Soon';if(emblem){var bs=document.createElement('span');bs.className='lock-badge';bs.innerHTML=CLOCK;emblem.appendChild(bs);}}else if(state==='granted'){t.style.cursor='pointer';if(foot)foot.innerHTML='<span class="app-go">Open Commercial <b>→</b></span>';if(status)status.textContent='Beta';}else{t.classList.add('is-locked');t.style.cursor='default';if(foot)foot.innerHTML='<span style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#aab3c0;padding:9px 2px">'+LOCK+' Restricted · ask an admin</span>';if(status)status.innerHTML='<span style="font-size:9px">'+LOCK+'</span> Locked';if(emblem){var bl=document.createElement('span');bl.className='lock-badge';bl.innerHTML=LOCK;emblem.appendChild(bl);}}}
+/* Commercial not yet live in prod — always render the dimmed "Soon" card (never navigates). */
+function applyCommercialState(u){setCommercialTile('soon');}
 /* Land Cloud tile — role-gated (client-side, cosmetic). Granted = open; else a locked
    tile with no request flow (farm access is role-based, granted by an admin). */
 function setLandCloudTile(state){var t=$('tileLandCloud');if(!t)return;var LOCK='<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-0.16em"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>';t.setAttribute('data-state',state);t.classList.remove('is-locked');var foot=t.querySelector('.app-foot');var status=t.querySelector('.app-status');var emblem=t.querySelector('.app-emblem');var ob=emblem?emblem.querySelector('.lock-badge'):null;if(ob)ob.remove();if(state==='granted'){t.style.cursor='pointer';if(foot)foot.innerHTML='<span class="app-go">Open Land Cloud <b>→</b></span>';if(status)status.textContent='New';}else{t.classList.add('is-locked');t.style.cursor='default';if(foot)foot.innerHTML='<span style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#aab3c0;padding:9px 2px">'+LOCK+' Restricted · ask an admin</span>';if(status)status.innerHTML='<span style="font-size:9px">'+LOCK+'</span> Locked';if(emblem){var bl=document.createElement('span');bl.className='lock-badge';bl.innerHTML=LOCK;emblem.appendChild(bl);}}}
 function applyLandCloudState(u){setLandCloudTile(FARM_ROLES[(u&&u.role)||'']?'granted':'locked');}
 $('tileVision').onclick=function(){openProduct('vision');};
 $('tileAnalytics').onclick=function(){var st=$('tileAnalytics').getAttribute('data-state');if(st==='granted'){openProduct('analytics');}else if(st==='none'){requestAnalyticsAccess();}};
+$('tileCommercial').onclick=function(){if($('tileCommercial').getAttribute('data-state')==='granted'){openProduct('commercial');}};
 $('tileLandCloud').onclick=function(){if($('tileLandCloud').getAttribute('data-state')==='granted'){openProduct('landcloud');}};
 $('chSignoutPill').onclick=function(){sb.auth.signOut().then(function(){window.location.reload();});};
 function resolveUser(au){
